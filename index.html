@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arabic Vocabulary Flashcards</title>
+    <title>Arabic Vocabulary Flashcards - Static</title>
     <style>
         * {
             margin: 0;
@@ -15,15 +15,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
         }
 
         .container {
-            max-width: 800px;
-            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         h1 {
@@ -65,64 +62,97 @@
         }
 
         .flashcard-container {
-            perspective: 1000px;
             margin-bottom: 30px;
         }
 
         .flashcard {
-            width: 100%;
-            height: 400px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            cursor: pointer;
-        }
-
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
+            background: white;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-height: 400px;
         }
 
-        .flashcard-front {
-            background: white;
-            color: #333;
+        .card-visual-top {
+            font-size: 7em;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
-        .flashcard-back {
-            background: #667eea;
-            color: white;
-            transform: rotateY(180deg);
+        .card-visual-top img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+        }
+
+        .card-visual-top svg {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .card-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 100%;
+            align-items: start;
+        }
+
+        .card-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-side-left {
+            border-right: 3px solid #e5e7eb;
+        }
+
+        .card-visual {
+            font-size: 6em;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            display: none;
+        }
+
+        .card-label {
+            font-size: 0.9em;
+            color: #9ca3af;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: none;
         }
 
         .card-text {
-            font-size: 3em;
+            font-size: 2.5em;
             font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .card-side-right .card-text {
+            color: #667eea;
+            font-size: 3em;
         }
 
         .card-pronunciation {
-            font-size: 1.5em;
-            color: #666;
+            font-size: 1.3em;
+            color: #6b7280;
             font-style: italic;
-            margin-top: 10px;
         }
 
-        .flashcard-back .card-pronunciation {
-            color: rgba(255,255,255,0.8);
+        .card-side-left .card-pronunciation {
+            display: none;
         }
 
         .card-category {
@@ -134,6 +164,7 @@
             border-radius: 15px;
             font-size: 0.9em;
             font-weight: bold;
+            color: #667eea;
         }
 
         .navigation {
@@ -193,36 +224,57 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
 
-        .hint {
-            color: white;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
             }
             
             .flashcard {
-                height: 350px;
+                padding: 30px 20px;
+            }
+
+            .card-visual-top {
+                font-size: 5em;
+            }
+
+            .card-visual-top img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .card-visual-top svg {
+                width: 140px;
+                height: 140px;
+            }
+
+            .card-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card-side-left {
+                border-right: none;
+                border-bottom: 3px solid #e5e7eb;
+                padding-bottom: 30px;
             }
             
             .card-text {
                 font-size: 2em;
             }
+
+            .card-side-right .card-text {
+                font-size: 2.5em;
+            }
             
             .card-pronunciation {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🌙 Arabic Vocabulary Flashcards</h1>
+        <h1>Arabic Vocabulary Flashcards For Kids</h1>
         
         <div class="controls">
             <button class="category-btn active" data-category="all">All</button>
@@ -240,20 +292,25 @@
 
         <div class="flashcard-container">
             <div class="flashcard" id="flashcard">
-                <div class="flashcard-face flashcard-front">
-                    <div class="card-category" id="category-front"></div>
-                    <div class="card-text" id="english-text"></div>
-                    <div class="card-pronunciation" id="pronunciation-front"></div>
-                </div>
-                <div class="flashcard-face flashcard-back">
-                    <div class="card-category" id="category-back"></div>
-                    <div class="card-text" id="arabic-text"></div>
-                    <div class="card-pronunciation" id="pronunciation-back"></div>
+                <div class="card-category" id="category"></div>
+                
+                <div class="card-visual-top" id="visual-top"></div>
+                
+                <div class="card-content">
+                    <div class="card-side card-side-left">
+                        <div class="card-label">English</div>
+                        <div class="card-text" id="english-text"></div>
+                        <div class="card-pronunciation" id="pronunciation-english"></div>
+                    </div>
+                    
+                    <div class="card-side card-side-right">
+                        <div class="card-label">العربية</div>
+                        <div class="card-text" id="arabic-text"></div>
+                        <div class="card-pronunciation" id="pronunciation-arabic"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="hint">Click card to flip</div>
 
         <div class="navigation">
             <button class="nav-btn" id="prev-btn">← Previous</button>
@@ -266,89 +323,88 @@
     <script>
         const vocabulary = [
             // Objects
-            { arabic: "ورقة", pronunciation: "waraqah", english: "paper", category: "objects" },
-            { arabic: "طاولة", pronunciation: "ṭāwilah", english: "desk", category: "objects" },
-            { arabic: "صندوق", pronunciation: "ṣundūq", english: "box", category: "objects" },
-            { arabic: "دفتر", pronunciation: "daftar", english: "notebook", category: "objects" },
-            { arabic: "كتاب", pronunciation: "kitāb", english: "book", category: "objects" },
-            { arabic: "قلم", pronunciation: "qalam", english: "pen", category: "objects" },
-            { arabic: "بيت", pronunciation: "bayt", english: "house", category: "objects" },
-            { arabic: "كرة", pronunciation: "kurah", english: "ball", category: "objects" },
-            { arabic: "لعبة", pronunciation: "lu'bah", english: "toy", category: "objects" },
+            { arabic: "ورقة", pronunciation: "waraqah", english: "paper", category: "objects", emoji: "📄" },
+            { arabic: "طاولة", pronunciation: "ṭāwilah", english: "desk", category: "objects", customImage: "https://cdn-icons-png.flaticon.com/512/3050/3050156.png" },
+            { arabic: "صندوق", pronunciation: "ṣundūq", english: "box", category: "objects", emoji: "📦" },
+            { arabic: "دفتر", pronunciation: "daftar", english: "notebook", category: "objects", emoji: "📓" },
+            { arabic: "كتاب", pronunciation: "kitāb", english: "book", category: "objects", emoji: "📖" },
+            { arabic: "قلم", pronunciation: "qalam", english: "pen", category: "objects", emoji: "✒️" },
+            { arabic: "بيت", pronunciation: "bayt", english: "house", category: "objects", emoji: "🏠" },
+            { arabic: "كرة", pronunciation: "kurah", english: "ball", category: "objects", emoji: "⚽" },
+            { arabic: "لعبة", pronunciation: "lu'bah", english: "toy", category: "objects", emoji: "🧸" },
             
             // People
-            { arabic: "ولد", pronunciation: "walad", english: "boy", category: "people" },
-            { arabic: "بنت", pronunciation: "bint", english: "girl", category: "people" },
-            { arabic: "الجد", pronunciation: "al-jadd", english: "grandfather", category: "people" },
+            { arabic: "ولد", pronunciation: "walad", english: "boy", category: "people", emoji: "👦" },
+            { arabic: "بنت", pronunciation: "bint", english: "girl", category: "people", emoji: "👧" },
+            { arabic: "الجد", pronunciation: "al-jadd", english: "grandfather", category: "people", emoji: "👴" },
             
             // Pronouns
-            { arabic: "أنا", pronunciation: "ana", english: "I", category: "people" },
-            { arabic: "أنتَ", pronunciation: "anta", english: "you (m)", category: "people" },
-            { arabic: "أنتِ", pronunciation: "anti", english: "you (f)", category: "people" },
-            { arabic: "هو", pronunciation: "huwa", english: "he", category: "people" },
-            { arabic: "هي", pronunciation: "hiya", english: "she", category: "people" },
+            { arabic: "أنا", pronunciation: "ana", english: "I", category: "people", emoji: "🙋" },
+            { arabic: "أنتَ", pronunciation: "anta", english: "you (m)", category: "people", emoji: "👤" },
+            { arabic: "أنتِ", pronunciation: "anti", english: "you (f)", category: "people", emoji: "👤" },
+            { arabic: "هو", pronunciation: "huwa", english: "he", category: "people", emoji: "👨" },
+            { arabic: "هي", pronunciation: "hiya", english: "she", category: "people", emoji: "👩" },
             
             // Demonstratives
-            { arabic: "هذا", pronunciation: "hādhā", english: "this (m)", category: "people" },
-            { arabic: "هذه", pronunciation: "hādhihi", english: "this (f)", category: "people" },
+            { arabic: "هذا", pronunciation: "hādhā", english: "this (m)", category: "people", emoji: "👈" },
+            { arabic: "هذه", pronunciation: "hādhihi", english: "this (f)", category: "people", emoji: "👈" },
             
             // Shapes
-            { arabic: "دائرة", pronunciation: "dā'irah", english: "circle", category: "objects" },
-            { arabic: "مربع", pronunciation: "murabba'", english: "square", category: "objects" },
-            { arabic: "مثلث", pronunciation: "muthallath", english: "triangle", category: "objects" },
+            { arabic: "دائرة", pronunciation: "dā'irah", english: "circle", category: "objects", emoji: "⭕" },
+            { arabic: "مربع", pronunciation: "murabba'", english: "square", category: "objects", emoji: "🟦" },
+            { arabic: "مثلث", pronunciation: "muthallath", english: "triangle", category: "objects", emoji: "🔺" },
             
             // Transportation
-            { arabic: "مركب", pronunciation: "markab", english: "boat", category: "objects" },
-            { arabic: "سيارة", pronunciation: "sayyārah", english: "car", category: "objects" },
-            { arabic: "طائرة", pronunciation: "ṭā'irah", english: "airplane", category: "objects" },
-            { arabic: "حافلة", pronunciation: "ḥāfilah", english: "bus", category: "objects" },
+            { arabic: "مركب", pronunciation: "markab", english: "boat", category: "objects", emoji: "⛵" },
+            { arabic: "سيارة", pronunciation: "sayyārah", english: "car", category: "objects", emoji: "🚗" },
+            { arabic: "طائرة", pronunciation: "ṭā'irah", english: "airplane", category: "objects", emoji: "✈️" },
+            { arabic: "حافلة", pronunciation: "ḥāfilah", english: "bus", category: "objects", emoji: "🚌" },
             
             // Animals
-            { arabic: "كلب", pronunciation: "kalb", english: "dog", category: "animals" },
-            { arabic: "البطة", pronunciation: "al-baṭṭah", english: "duck", category: "animals" },
-            { arabic: "الأرنب", pronunciation: "al-arnab", english: "rabbit", category: "animals" },
-            { arabic: "القطة", pronunciation: "al-qiṭṭah", english: "cat", category: "animals" },
-            { arabic: "الذئب", pronunciation: "adh-dhi'b", english: "wolf", category: "animals" },
-            { arabic: "فئران", pronunciation: "fi'rān", english: "mice", category: "animals" },
-            { arabic: "قرود", pronunciation: "qurūd", english: "monkeys", category: "animals" },
+            { arabic: "كلب", pronunciation: "kalb", english: "dog", category: "animals", emoji: "🐕" },
+            { arabic: "البطة", pronunciation: "al-baṭṭah", english: "duck", category: "animals", emoji: "🦆" },
+            { arabic: "الأرنب", pronunciation: "al-arnab", english: "rabbit", category: "animals", emoji: "🐰" },
+            { arabic: "القطة", pronunciation: "al-qiṭṭah", english: "cat", category: "animals", emoji: "🐱" },
+            { arabic: "الذئب", pronunciation: "adh-dhi'b", english: "wolf", category: "animals", emoji: "🐺" },
+            { arabic: "فئران", pronunciation: "fi'rān", english: "mice", category: "animals", emoji: "🐭" },
+            { arabic: "قرود", pronunciation: "qurūd", english: "monkeys", category: "animals", emoji: "🐵" },
             
             // Food
-            { arabic: "خس", pronunciation: "khas", english: "lettuce", category: "food" },
-            { arabic: "سمك", pronunciation: "samak", english: "fish", category: "food" },
-            { arabic: "جزر", pronunciation: "jazar", english: "carrots", category: "food" },
-            { arabic: "حليب", pronunciation: "ḥalīb", english: "milk", category: "food" },
-            { arabic: "ماء", pronunciation: "mā'", english: "water", category: "food" },
-            { arabic: "لحم", pronunciation: "laḥm", english: "meat", category: "food" },
+            { arabic: "خس", pronunciation: "khas", english: "lettuce", category: "food", emoji: "🥬" },
+            { arabic: "سمك", pronunciation: "samak", english: "fish", category: "food", emoji: "🐟" },
+            { arabic: "جزر", pronunciation: "jazar", english: "carrots", category: "food", emoji: "🥕" },
+            { arabic: "حليب", pronunciation: "ḥalīb", english: "milk", category: "food", emoji: "🥛" },
+            { arabic: "ماء", pronunciation: "mā'", english: "water", category: "food", emoji: "💧" },
+            { arabic: "لحم", pronunciation: "laḥm", english: "meat", category: "food", emoji: "🥩" },
             
             // Feelings
-            { arabic: "جوعان", pronunciation: "jaw'ān", english: "hungry", category: "feelings" },
-            { arabic: "سعيد", pronunciation: "sa'īd", english: "happy", category: "feelings" },
-            { arabic: "غضبان", pronunciation: "ghaḍbān", english: "angry", category: "feelings" },
-            { arabic: "شبعان", pronunciation: "shab'ān", english: "full", category: "feelings" },
-            { arabic: "حزين", pronunciation: "ḥazīn", english: "sad", category: "feelings" },
+            { arabic: "جوعان", pronunciation: "jaw'ān", english: "hungry", category: "feelings", emoji: "😋" },
+            { arabic: "سعيد", pronunciation: "sa'īd", english: "happy", category: "feelings", emoji: "😊" },
+            { arabic: "غضبان", pronunciation: "ghaḍbān", english: "angry", category: "feelings", emoji: "😠" },
+            { arabic: "شبعان", pronunciation: "shab'ān", english: "full", category: "feelings", emoji: "🍽️" },
+            { arabic: "حزين", pronunciation: "ḥazīn", english: "sad", category: "feelings", emoji: "😢" },
             
             // Verbs
-            { arabic: "يحب", pronunciation: "yuḥibbu", english: "he loves", category: "verbs" },
-            { arabic: "تحب", pronunciation: "tuḥibbu", english: "she loves", category: "verbs" },
-            { arabic: "يجري", pronunciation: "yajrī", english: "he runs", category: "verbs" },
-            { arabic: "تجري", pronunciation: "tajrī", english: "she runs", category: "verbs" },
-            { arabic: "يبحث", pronunciation: "yabḥathu", english: "he looks for", category: "verbs" },
-            { arabic: "يسمع", pronunciation: "yasma'u", english: "he listens", category: "verbs" },
-            { arabic: "احب", pronunciation: "uḥibbu", english: "I love", category: "verbs" },
-            { arabic: "اريد", pronunciation: "urīdu", english: "I want", category: "verbs" },
+            { arabic: "يحب", pronunciation: "yuḥibbu", english: "he loves", category: "verbs", emoji: "❤️" },
+            { arabic: "تحب", pronunciation: "tuḥibbu", english: "she loves", category: "verbs", emoji: "💕" },
+            { arabic: "يجري", pronunciation: "yajrī", english: "he runs", category: "verbs", emoji: "🏃" },
+            { arabic: "تجري", pronunciation: "tajrī", english: "she runs", category: "verbs", emoji: "🏃‍♀️" },
+            { arabic: "يبحث", pronunciation: "yabḥathu", english: "he looks for", category: "verbs", emoji: "🔍" },
+            { arabic: "يسمع", pronunciation: "yasma'u", english: "he listens", category: "verbs", emoji: "👂" },
+            { arabic: "احب", pronunciation: "uḥibbu", english: "I love", category: "verbs", emoji: "💖" },
+            { arabic: "اريد", pronunciation: "urīdu", english: "I want", category: "verbs", emoji: "🙏" },
         ];
 
         let currentCards = [...vocabulary];
         let currentIndex = 0;
         let selectedCategory = 'all';
 
-        const flashcard = document.getElementById('flashcard');
         const englishText = document.getElementById('english-text');
         const arabicText = document.getElementById('arabic-text');
-        const pronunciationFront = document.getElementById('pronunciation-front');
-        const pronunciationBack = document.getElementById('pronunciation-back');
-        const categoryFront = document.getElementById('category-front');
-        const categoryBack = document.getElementById('category-back');
+        const pronunciationEnglish = document.getElementById('pronunciation-english');
+        const pronunciationArabic = document.getElementById('pronunciation-arabic');
+        const category = document.getElementById('category');
+        const visualTop = document.getElementById('visual-top');
         const currentSpan = document.getElementById('current');
         const totalSpan = document.getElementById('total');
         const prevBtn = document.getElementById('prev-btn');
@@ -360,26 +416,42 @@
             const card = currentCards[currentIndex];
             englishText.textContent = card.english;
             arabicText.textContent = card.arabic;
-            pronunciationFront.textContent = card.pronunciation;
-            pronunciationBack.textContent = card.pronunciation;
-            categoryFront.textContent = card.category;
-            categoryBack.textContent = card.category;
+            pronunciationEnglish.textContent = card.pronunciation;
+            pronunciationArabic.textContent = card.pronunciation;
+            category.textContent = card.category;
+            
+            // Handle custom images or emojis
+            if (card.english === 'desk') {
+                // SVG table icon
+                visualTop.innerHTML = `
+                    <svg width="180" height="180" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="20" width="80" height="8" fill="#8B4513" stroke="#000" stroke-width="2"/>
+                        <rect x="12" y="28" width="4" height="50" fill="#A0522D" stroke="#000" stroke-width="1.5"/>
+                        <rect x="84" y="28" width="4" height="50" fill="#A0522D" stroke="#000" stroke-width="1.5"/>
+                        <rect x="30" y="28" width="4" height="50" fill="#A0522D" stroke="#000" stroke-width="1.5"/>
+                        <rect x="66" y="28" width="4" height="50" fill="#A0522D" stroke="#000" stroke-width="1.5"/>
+                        <rect x="8" y="18" width="84" height="4" fill="#D2691E" stroke="#000" stroke-width="1.5"/>
+                    </svg>
+                `;
+            } else if (card.customImage) {
+                visualTop.innerHTML = `<img src="${card.customImage}" alt="${card.english}">`;
+            } else {
+                visualTop.textContent = card.emoji || '';
+            }
+            
             currentSpan.textContent = currentIndex + 1;
             totalSpan.textContent = currentCards.length;
             
             prevBtn.disabled = currentIndex === 0;
             nextBtn.disabled = currentIndex === currentCards.length - 1;
-            
-            // Remove flip when changing cards
-            flashcard.classList.remove('flipped');
         }
 
-        function filterByCategory(category) {
-            selectedCategory = category;
-            if (category === 'all') {
+        function filterByCategory(cat) {
+            selectedCategory = cat;
+            if (cat === 'all') {
                 currentCards = [...vocabulary];
             } else {
-                currentCards = vocabulary.filter(card => card.category === category);
+                currentCards = vocabulary.filter(card => card.category === cat);
             }
             currentIndex = 0;
             updateCard();
@@ -393,10 +465,6 @@
             }
             return newArray;
         }
-
-        flashcard.addEventListener('click', () => {
-            flashcard.classList.toggle('flipped');
-        });
 
         prevBtn.addEventListener('click', () => {
             if (currentIndex > 0) {
@@ -434,9 +502,6 @@
             } else if (e.key === 'ArrowRight' && currentIndex < currentCards.length - 1) {
                 currentIndex++;
                 updateCard();
-            } else if (e.key === ' ') {
-                e.preventDefault();
-                flashcard.classList.toggle('flipped');
             }
         });
 
